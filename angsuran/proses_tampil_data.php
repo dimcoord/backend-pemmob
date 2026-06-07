@@ -25,31 +25,28 @@
 		}
 	});
 
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
 	include '../koneksi.php';
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+	$pinjaman_id = $_GET['pinjaman_id'];
 
-$query = "SELECT p.*, a.nama, a.no_urut, COALESCE(SUM(ag.jumlah_bayar), 0) as total_angsuran
-          FROM pinjaman p
-          LEFT JOIN anggota a ON p.anggota_id = a.id
-          LEFT JOIN angsuran ag ON ag.pinjaman_id = p.id
-          GROUP BY p.id
-          ORDER BY p.id DESC";
-$hasil = mysqli_query($koneksi, $query);
-if (!$hasil) {
-	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
-	error_log($entry, 3, $log_file);
-	echo "Error fetching data.";
-	exit;
-}
-$temp = [];
+	$query = "SELECT COALESCE(SUM(jumlah_bayar), 0) as total_bayar FROM angsuran WHERE pinjaman_id = '$pinjaman_id'";
+	$hasil = mysqli_query($koneksi, $query);
+	if (!$hasil) {
+		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
+		error_log($entry, 3, $log_file);
+		echo "Error fetching data.";
+		exit;
+	}
+	$temp = [];
 
-while($data = mysqli_fetch_array($hasil)){
-	$temp[] = $data;
-}
+	while($data = mysqli_fetch_array($hasil)){
+		$temp[] = $data;
+	}
 
-echo json_encode($temp);
+	echo json_encode($temp);
 
 ?>
