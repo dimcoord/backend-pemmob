@@ -31,7 +31,13 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$query = "SELECT * FROM simpanan ORDER BY simpanan.id DESC";
+$bulanFilter = $_GET['bulan'] ?? date('Y-m');
+
+$query = "SELECT s.*, a.nama, a.no_anggota 
+          FROM simpanan s
+          JOIN anggota a ON s.anggota_id = a.id
+          WHERE DATE_FORMAT(s.tgl_transaksi, '%Y-%m') = '$bulanFilter'
+          ORDER BY s.id DESC";
 $hasil = mysqli_query($koneksi, $query);
 if (!$hasil) {
 	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
