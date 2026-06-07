@@ -27,19 +27,23 @@
 
 	include '../koneksi.php';
 
-$anggota_id = $_POST['dart_anggota_id'];
-$tgl_transaksi = $_POST['dart_tgl_transaksi'];
-$tipe = $_POST['dart_tipe'];
-$jumlah = $_POST['dart_jumlah'];
-$bulan_iuran = $_POST['dart_bulan_iuran'];
-$tahun_iuran = $_POST['dart_tahun_iuran'];
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$query = "INSERT INTO transaksi_kas (anggota_id, tgl_transaksi, tipe, jumlah, bulan_iuran, tahun_iuran) VALUES ('$anggota_id', '$tgl_transaksi', '$tipe', '$jumlah', '$bulan_iuran', '$tahun_iuran')";
+	$anggota_id = $_POST['dart_anggota_id'];
+	$tgl_transaksi = $_POST['dart_tgl_transaksi'];
+	$tipe = $_POST['dart_tipe'];
+	$jumlah = $_POST['dart_jumlah'];
+	$bulan_iuran = $_POST['dart_bulan_iuran'];
+	$tahun_iuran = $_POST['dart_tahun_iuran'];
 
-if (!mysqli_query($koneksi, $query)) {
-	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
-	error_log($entry, 3, $log_file);
-	echo "Error adding data.";
-}
+	$query = "INSERT INTO transaksi_kas (anggota_id, tgl_transaksi, tipe, jumlah, bulan_iuran, tahun_iuran) VALUES ('$anggota_id', '$tgl_transaksi', '$tipe', '$jumlah', '$bulan_iuran', '$tahun_iuran')";
+
+	if (!mysqli_query($koneksi, $query)) {
+		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
+		error_log($entry, 3, $log_file);
+		echo "Error adding data.";
+	}
 
 ?>

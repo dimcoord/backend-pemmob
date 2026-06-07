@@ -31,7 +31,11 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$query = "SELECT * FROM simpanan ORDER BY simpanan.id DESC";
+$query = "SELECT s.*, a.nama
+          FROM simpanan s
+          LEFT JOIN anggota a ON s.anggota_id = a.id
+          ORDER BY s.id DESC";
+		  
 $hasil = mysqli_query($koneksi, $query);
 if (!$hasil) {
 	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";

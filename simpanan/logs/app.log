@@ -1,1 +1,30 @@
-2026-06-01T09:15:12+00:00 | EXCEPTION | Unknown column 'pass' in 'field list' | D:\laragon\www\pemmob12\proses_edit_data.php:41
+2026-06-07T06:09:12+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:09:21+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:13:44+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:13:49+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:16:23+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:16:43+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:16:45+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:21:07+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:26:01+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:26:32+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:30:01+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:32:05+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:34:06+00:00 | EXCEPTION | Unknown column 'a.no_anggota' in 'field list' | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:41
+2026-06-07T06:37:24+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:37:33+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:43:34+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:43:35+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:43:40+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:43:44+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:35+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:38+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:40+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:41+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:41+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:41+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:42+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:42+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:42+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:42+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37
+2026-06-07T06:44:43+00:00 | ERROR | Undefined variable $bulanFilter | D:\laragon\www\backend-api\simpanan\proses_tampil_data.php:37

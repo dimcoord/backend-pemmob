@@ -27,24 +27,24 @@
 
 	include '../koneksi.php';
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$query = "SELECT * FROM anggota ORDER BY anggota.urut DESC";
-$hasil = mysqli_query($koneksi, $query);
-if (!$hasil) {
-	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
-	error_log($entry, 3, $log_file);
-	echo "Error fetching data.";
-	exit;
-}
-$temp = [];
+	$query = "SELECT * FROM anggota ORDER BY anggota.no_urut DESC";
+	$hasil = mysqli_query($koneksi, $query);
+	if (!$hasil) {
+		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
+		error_log($entry, 3, $log_file);
+		echo "Error fetching data.";
+		exit;
+	}
+	$temp = [];
 
-while($data = mysqli_fetch_array($hasil)){
-	$temp[] = $data;
-}
+	while($data = mysqli_fetch_array($hasil)){
+		$temp[] = $data;
+	}
 
-echo json_encode($temp);
+	echo json_encode($temp);
 
 ?>

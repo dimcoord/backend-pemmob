@@ -25,32 +25,25 @@
 		}
 	});
 
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
 	include '../koneksi.php';
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+	$anggota_id = $_POST['dart_anggota_id'];
+	$tgl_transaksi = $_POST['dart_tgl_transaksi'];
+	$jenis = $_POST['dart_jenis_simpanan'];
+	$jumlah = $_POST['dart_jumlah_simpanan'];
+	$bulan_iuran = $_POST['dart_bulan_iuran'];
+	$tahun_iuran = $_POST['dart_tahun_iuran'];
 
-$bulanFilter = $_GET['bulan'] ?? date('Y-m');
+	$query = "INSERT INTO simpanan (anggota_id, tgl_transaksi, jenis, jumlah, bulan_iuran, tahun_iuran) VALUES ('$anggota_id', '$tgl_transaksi', '$jenis', '$jumlah', '$bulan_iuran', '$tahun_iuran')";
 
-$query = "SELECT s.*, a.nama, a.no_anggota 
-          FROM simpanan s
-          JOIN anggota a ON s.anggota_id = a.id
-          WHERE DATE_FORMAT(s.tgl_transaksi, '%Y-%m') = '$bulanFilter'
-          ORDER BY s.id DESC";
-$hasil = mysqli_query($koneksi, $query);
-if (!$hasil) {
-	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
-	error_log($entry, 3, $log_file);
-	echo "Error fetching data.";
-	exit;
-}
-$temp = [];
-
-while($data = mysqli_fetch_array($hasil)){
-	$temp[] = $data;
-}
-
-echo json_encode($temp);
+	if (!mysqli_query($koneksi, $query)) {
+		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
+		error_log($entry, 3, $log_file);
+		echo "Error adding data.";
+	}
 
 ?>

@@ -28,13 +28,15 @@
 	include '../koneksi.php';
 
 	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 	$id = $_POST['dart_id'];
 	$urut = $_POST['dart_urut'];
 	$nama = $_POST['dart_nama'];
 	$alamat = $_POST['dart_alamat'];
 
-	$query = "UPDATE anggota SET urut = '".$urut."', nama = '".$nama."', alamat = '".$alamat."' WHERE id = '".$id."'";
+	$query = "UPDATE anggota SET no_urut = '".$urut."', nama = '".$nama."', alamat = '".$alamat."' WHERE id = '".$id."'";
 
 	if (!mysqli_query($koneksi, $query)) {
 		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";

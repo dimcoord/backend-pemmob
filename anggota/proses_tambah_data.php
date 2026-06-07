@@ -27,16 +27,20 @@
 
 	include '../koneksi.php';
 
-$urut = $_POST['dart_urut'];
-$nama = $_POST['dart_nama'];
-$alamat = $_POST['dart_alamat'];
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$query = "INSERT INTO anggota (urut, nama, alamat) VALUES ('$urut', '$nama', '$alamat')";
+	$urut = $_POST['dart_urut'];
+	$nama = $_POST['dart_nama'];
+	$alamat = $_POST['dart_alamat'];
 
-if (!mysqli_query($koneksi, $query)) {
-	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
-	error_log($entry, 3, $log_file);
-	echo "Error adding data.";
-}
+	$query = "INSERT INTO anggota (no_urut, nama, alamat) VALUES ('$urut', '$nama', '$alamat')";
+
+	if (!mysqli_query($koneksi, $query)) {
+		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
+		error_log($entry, 3, $log_file);
+		echo "Error adding data.";
+	}
 
 ?>
