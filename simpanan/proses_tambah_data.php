@@ -48,4 +48,8 @@ if (!mysqli_query($koneksi, $query)) {
 	echo "Berhasil Menambah Simpanan";
 }
 
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 2f7a516a7dd8b1fbb4c374269f6168a11189d9f1
