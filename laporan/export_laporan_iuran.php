@@ -44,7 +44,7 @@ $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
 $sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
 // Header
-$headers = ['No', 'No Anggota', 'Nama', 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des', 'Total'];
+$headers = ['No', 'Nama', 'Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des', 'Total'];
 
 $col = 'A';
 $headerRow = 3;
@@ -53,7 +53,7 @@ foreach ($headers as $header) {
 	$col++;
 }
 
-$headerStyle = $sheet->getStyle('A3:P3');
+$headerStyle = $sheet->getStyle('A3:O3');
 $headerStyle->getFont()->setBold(true);
 $headerStyle->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID);
 $headerStyle->getFill()->getStartColor()->setARGB('FF0A192F');
@@ -61,7 +61,7 @@ $headerStyle->getFont()->getColor()->setARGB('FFFFFFFF');
 $headerStyle->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
 // Data
-$query = "SELECT a.id, a.no_urut, a.nama,
+$query = "SELECT a.id, a.nama,
 	COALESCE(SUM(CASE WHEN tk.bulan_iuran = 1 THEN tk.jumlah ELSE 0 END), 0) AS jan,
 	COALESCE(SUM(CASE WHEN tk.bulan_iuran = 2 THEN tk.jumlah ELSE 0 END), 0) AS feb,
 	COALESCE(SUM(CASE WHEN tk.bulan_iuran = 3 THEN tk.jumlah ELSE 0 END), 0) AS mar,
@@ -94,7 +94,6 @@ $no = 1;
 while ($data = mysqli_fetch_array($hasil)) {
 	$col = 'A';
 	$sheet->setCellValue($col++ . $row, $no);
-	$sheet->setCellValue($col++ . $row, $data['no_urut']);
 	$sheet->setCellValue($col++ . $row, $data['nama']);
 
 	$total = 0;
@@ -117,13 +116,15 @@ while ($data = mysqli_fetch_array($hasil)) {
 
 // Border all cells
 $lastRow = $row - 1;
-$borderStyle = $sheet->getStyle('A3:P' . $lastRow);
+$borderStyle = $sheet->getStyle('A3:O' . $lastRow);
 $borderStyle->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
 // Auto width
-foreach (range('A', 'P') as $col) {
+foreach (range('A', 'O') as $col) {
 	$sheet->getColumnDimension($col)->setAutoSize(true);
 }
+
+if (ob_get_length()) ob_clean();
 
 // Set header for download
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
