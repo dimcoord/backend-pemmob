@@ -26,9 +26,8 @@
 	});
 
 	header('Access-Control-Allow-Origin: *'); // Izinkan semua domain
-	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+	header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 	header('Access-Control-Allow-Headers: Content-Type, Authorization');
-
 	include '../koneksi.php';
 		
 	$id = $_POST['dart_id'];
