@@ -54,10 +54,11 @@ $totalKeluar = $summaryData['total_keluar'];
 $saldo = $totalMasuk - $totalKeluar;
 
 // Transaksi list
-$transaksiQuery = "SELECT id, tgl_transaksi, tipe, jumlah, keterangan 
-  FROM transaksi_kas 
-  WHERE COALESCE(tahun_iuran, YEAR(tgl_transaksi)) = YEAR('$bulan-01') AND COALESCE(bulan_iuran, MONTH(tgl_transaksi)) = MONTH('$bulan-01') 
-  ORDER BY tgl_transaksi DESC, id DESC";
+$transaksiQuery = "SELECT tk.id, tk.tgl_transaksi, tk.tipe, tk.jumlah, tk.keterangan, a.nama
+  FROM transaksi_kas tk
+  LEFT JOIN anggota a ON tk.anggota_id = a.id
+  WHERE COALESCE(tk.tahun_iuran, YEAR(tk.tgl_transaksi)) = YEAR('$bulan-01') AND COALESCE(tk.bulan_iuran, MONTH(tk.tgl_transaksi)) = MONTH('$bulan-01') 
+  ORDER BY tk.tgl_transaksi DESC, tk.id DESC";;
 $transaksiHasil = mysqli_query($koneksi, $transaksiQuery);
 
 if (!$transaksiHasil) {
