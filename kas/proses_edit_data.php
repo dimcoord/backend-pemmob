@@ -38,8 +38,10 @@
 	$jumlah = $_POST['dart_jumlah'];
 	$bulan_iuran = $_POST['dart_bulan_iuran'];
 	$tahun_iuran = $_POST['dart_tahun_iuran'];
-	
-	$query = "UPDATE transaksi_kas SET anggota_id = '".$anggota_id."', tgl_transaksi = '".$tgl_transaksi."', tipe = '".$tipe."', jumlah = '".$jumlah."', bulan_iuran = '".$bulan_iuran."', tahun_iuran = '".$tahun_iuran."' WHERE id = '".$id."'";
+	$keterangan = $_POST['dart_keterangan'];
+
+	$anggota_val = ($anggota_id === '' || $anggota_id === '0') ? 'NULL' : "'$anggota_id'";
+	$query = "UPDATE transaksi_kas SET anggota_id = $anggota_val, tgl_transaksi = '".$tgl_transaksi."', tipe = '".$tipe."', jumlah = '".$jumlah."', bulan_iuran = '".$bulan_iuran."', tahun_iuran = '".$tahun_iuran."', keterangan = '".$keterangan."' WHERE id = '".$id."'";
 
 	if (!mysqli_query($koneksi, $query)) {
 		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";

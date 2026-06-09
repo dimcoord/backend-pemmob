@@ -1,1 +1,6 @@
 2026-06-01T09:15:12+00:00 | EXCEPTION | Unknown column 'pass' in 'field list' | D:\laragon\www\pemmob12\proses_edit_data.php:41
+2026-06-09T00:52:06+00:00 | EXCEPTION | Cannot add or update a child row: a foreign key constraint fails (`db_koperasi`.`transaksi_kas`, CONSTRAINT `transaksi_kas_ibfk_1` FOREIGN KEY (`anggota_id`) REFERENCES `anggota` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) | D:\laragon\www\backend-api\kas\proses_tambah_data.php:43
+2026-06-09T00:57:50+00:00 | ERROR | Undefined array key "dart_keterangan" | D:\laragon\www\backend-api\kas\proses_tambah_data.php:40
+2026-06-09T00:58:00+00:00 | ERROR | Undefined array key "dart_keterangan" | D:\laragon\www\backend-api\kas\proses_tambah_data.php:40
+2026-06-09T00:58:00+00:00 | EXCEPTION | Cannot add or update a child row: a foreign key constraint fails (`db_koperasi`.`transaksi_kas`, CONSTRAINT `transaksi_kas_ibfk_1` FOREIGN KEY (`anggota_id`) REFERENCES `anggota` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) | D:\laragon\www\backend-api\kas\proses_tambah_data.php:44
+2026-06-09T01:05:11+00:00 | EXCEPTION | Cannot add or update a child row: a foreign key constraint fails (`db_koperasi`.`transaksi_kas`, CONSTRAINT `transaksi_kas_ibfk_1` FOREIGN KEY (`anggota_id`) REFERENCES `anggota` (`id`) ON DELETE SET NULL ON UPDATE CASCADE) | D:\laragon\www\backend-api\kas\proses_tambah_data.php:44

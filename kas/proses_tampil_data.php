@@ -36,7 +36,7 @@
 	$query = "SELECT transaksi_kas.*, anggota.nama, anggota.no_urut
 		FROM transaksi_kas
 		LEFT JOIN anggota ON transaksi_kas.anggota_id = anggota.id
-		WHERE transaksi_kas.tahun_iuran = YEAR('$bulan-01') AND transaksi_kas.bulan_iuran = MONTH('$bulan-01')
+		WHERE COALESCE(transaksi_kas.tahun_iuran, YEAR(transaksi_kas.tgl_transaksi)) = YEAR('$bulan-01') AND COALESCE(transaksi_kas.bulan_iuran, MONTH(transaksi_kas.tgl_transaksi)) = MONTH('$bulan-01')
 		ORDER BY transaksi_kas.id DESC";
 	$hasil = mysqli_query($koneksi, $query);
 	if (!$hasil) {
