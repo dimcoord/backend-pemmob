@@ -37,8 +37,10 @@
 	$jumlah = $_POST['dart_jumlah'];
 	$bulan_iuran = $_POST['dart_bulan_iuran'];
 	$tahun_iuran = $_POST['dart_tahun_iuran'];
+	$keterangan = $_POST['dart_keterangan'];
 
-	$query = "INSERT INTO transaksi_kas (anggota_id, tgl_transaksi, tipe, jumlah, bulan_iuran, tahun_iuran) VALUES ('$anggota_id', '$tgl_transaksi', '$tipe', '$jumlah', '$bulan_iuran', '$tahun_iuran')";
+	$anggota_val = ($anggota_id === '' || $anggota_id === '0') ? 'NULL' : "'$anggota_id'";
+	$query = "INSERT INTO transaksi_kas (anggota_id, tgl_transaksi, tipe, jumlah, bulan_iuran, tahun_iuran, keterangan) VALUES ($anggota_val, '$tgl_transaksi', '$tipe', '$jumlah', '$bulan_iuran', '$tahun_iuran', '$keterangan')";
 
 	if (!mysqli_query($koneksi, $query)) {
 		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
