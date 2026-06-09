@@ -31,7 +31,13 @@
 	header('Access-Control-Allow-Methods: GET');
 	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-	$query = "SELECT * FROM transaksi_kas ORDER BY transaksi_kas.id DESC";
+	$bulan = isset($_GET['bulan']) ? $_GET['bulan'] : date('Y-m');
+
+	$query = "SELECT transaksi_kas.*, anggota.nama, anggota.no_urut
+		FROM transaksi_kas
+		LEFT JOIN anggota ON transaksi_kas.anggota_id = anggota.id
+		WHERE transaksi_kas.tahun_iuran = YEAR('$bulan-01') AND transaksi_kas.bulan_iuran = MONTH('$bulan-01')
+		ORDER BY transaksi_kas.id DESC";
 	$hasil = mysqli_query($koneksi, $query);
 	if (!$hasil) {
 		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";

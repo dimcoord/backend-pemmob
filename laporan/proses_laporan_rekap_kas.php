@@ -38,7 +38,7 @@ $summaryQuery = "SELECT
   COALESCE(SUM(CASE WHEN tipe = 'Pemasukan' THEN jumlah ELSE 0 END), 0) AS total_masuk,
   COALESCE(SUM(CASE WHEN tipe = 'Pengeluaran' THEN jumlah ELSE 0 END), 0) AS total_keluar
   FROM transaksi_kas 
-  WHERE DATE_FORMAT(tgl_transaksi, '%Y-%m') = '$bulan'";
+  WHERE tahun_iuran = YEAR('$bulan-01') AND bulan_iuran = MONTH('$bulan-01')";
 $summaryHasil = mysqli_query($koneksi, $summaryQuery);
 
 if (!$summaryHasil) {
@@ -56,7 +56,7 @@ $saldo = $totalMasuk - $totalKeluar;
 // Transaksi list
 $transaksiQuery = "SELECT id, tgl_transaksi, tipe, jumlah, keterangan 
   FROM transaksi_kas 
-  WHERE DATE_FORMAT(tgl_transaksi, '%Y-%m') = '$bulan' 
+  WHERE tahun_iuran = YEAR('$bulan-01') AND bulan_iuran = MONTH('$bulan-01') 
   ORDER BY tgl_transaksi DESC, id DESC";
 $transaksiHasil = mysqli_query($koneksi, $transaksiQuery);
 

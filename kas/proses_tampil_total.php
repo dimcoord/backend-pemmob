@@ -27,33 +27,25 @@
 
 	include '../koneksi.php';
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET');
-header('Access-Control-Allow-Headers: Content-Type, Authorization');
+	header('Access-Control-Allow-Origin: *');
+	header('Access-Control-Allow-Methods: GET');
+	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-$bulanFilter = $_GET['bulan'] ?? '';
+	$query = "SELECT 
+		COALESCE(SUM(CASE WHEN tipe = 'Pemasukan' THEN jumlah ELSE 0 END), 0) AS total_masuk,
+		COALESCE(SUM(CASE WHEN tipe = 'Pengeluaran' THEN jumlah ELSE 0 END), 0) AS total_keluar
+		FROM transaksi_kas";
+	$hasil = mysqli_query($koneksi, $query);
+	if (!$hasil) {
+		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
+		error_log($entry, 3, $log_file);
+		echo "Error fetching data.";
+		exit;
+	}
 
-$query = "SELECT s.*, a.nama
-          FROM simpanan s
-          LEFT JOIN anggota a ON s.anggota_id = a.id";
-if ($bulanFilter != '') {
-    $query .= " WHERE s.tahun_iuran = YEAR('$bulanFilter-01') AND s.bulan_iuran = MONTH('$bulanFilter-01')";
-}
-$query .= " ORDER BY s.id DESC";
-		  
-$hasil = mysqli_query($koneksi, $query);
-if (!$hasil) {
-	$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
-	error_log($entry, 3, $log_file);
-	echo "Error fetching data.";
-	exit;
-}
-$temp = [];
+	$data = mysqli_fetch_array($hasil);
+	$saldo = $data['total_masuk'] - $data['total_keluar'];
 
-while($data = mysqli_fetch_array($hasil)){
-	$temp[] = $data;
-}
-
-echo json_encode($temp);
+	echo json_encode(['saldo' => $saldo]);
 
 ?>

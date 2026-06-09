@@ -41,7 +41,7 @@ $summaryQuery = "SELECT
   FROM simpanan s
   LEFT JOIN pinjaman p ON DATE_FORMAT(p.tgl_pinjam, '%Y-%m') = '$bulan'
   LEFT JOIN (SELECT pinjaman_id, SUM(jumlah_bayar) AS total_angsuran FROM angsuran GROUP BY pinjaman_id) a ON p.id = a.pinjaman_id
-  WHERE DATE_FORMAT(s.tgl_transaksi, '%Y-%m') = '$bulan'";
+  WHERE s.tahun_iuran = YEAR('$bulan-01') AND s.bulan_iuran = MONTH('$bulan-01')";
 $summaryHasil = mysqli_query($koneksi, $summaryQuery);
 
 if (!$summaryHasil) {
@@ -57,7 +57,7 @@ $summaryData = mysqli_fetch_array($summaryHasil);
 $simpananQuery = "SELECT s.anggota_id, a.no_urut, a.nama, s.jenis, s.jumlah
   FROM simpanan s
   LEFT JOIN anggota a ON s.anggota_id = a.id
-  WHERE DATE_FORMAT(s.tgl_transaksi, '%Y-%m') = '$bulan'
+  WHERE s.tahun_iuran = YEAR('$bulan-01') AND s.bulan_iuran = MONTH('$bulan-01')
   ORDER BY a.nama ASC";
 $simpananHasil = mysqli_query($koneksi, $simpananQuery);
 
