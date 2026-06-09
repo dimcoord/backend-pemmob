@@ -37,7 +37,7 @@ $query = "SELECT s.*, a.nama
           FROM simpanan s
           LEFT JOIN anggota a ON s.anggota_id = a.id";
 if ($bulanFilter != '') {
-    $query .= " WHERE DATE_FORMAT(s.tgl_transaksi, '%Y-%m') = '$bulanFilter'";
+    $query .= " WHERE s.tahun_iuran = YEAR('$bulanFilter-01') AND s.bulan_iuran = MONTH('$bulanFilter-01')";
 }
 $query .= " ORDER BY s.id DESC";
 		  
