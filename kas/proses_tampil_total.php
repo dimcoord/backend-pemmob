@@ -31,25 +31,28 @@
 	header('Access-Control-Allow-Methods: GET');
 	header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-	$bulanFilter = $_GET['bulan'] ?? '';
+	$query = "SELECT SUM(
+		CASE
+			WHEN tipe = 'Pemasukan' THEN jumlah
+			WHEN tipe = 'Pengeluaran' THEN -jumlah
+			ELSE 0
+		END
+	) AS saldo
+	FROM transaksi_kas";
 
-	$query = "SELECT tk.*, a.nama AS nama, (tipe = 'Pemasukan') AS masuk FROM transaksi_kas tk LEFT JOIN anggota a ON tk.anggota_id = a.id";
-	if ($bulanFilter != '') {
-		$query .= " WHERE DATE_FORMAT(tk.tgl_transaksi, '%Y-%m') = '$bulanFilter'";
-	}
 	$hasil = mysqli_query($koneksi, $query);
+
 	if (!$hasil) {
 		$entry = date('c') . " | DB_ERROR | " . mysqli_error($koneksi) . " | QUERY: " . $query . "\n";
 		error_log($entry, 3, $log_file);
-		echo "Error fetching data.";
+
+		http_response_code(500);
+		echo json_encode(['error' => 'Error fetching data']);
 		exit;
 	}
-	$temp = [];
 
-	while($data = mysqli_fetch_array($hasil)){
-		$temp[] = $data;
-	}
+	$data = mysqli_fetch_assoc($hasil);
 
-	echo json_encode($temp);
+	echo json_encode($data);
 
 ?>
